@@ -1,0 +1,21 @@
+---
+import PD from '../../components/PokemonDetails.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const { page } = Astro.params;
+const data = await fetch(`https://raw.githubusercontent.com/jherr/pokemon/main/pokemon/${page}.json`);
+const data_json = await data.json();
+
+export async function getStaticPaths({ paginate }) {
+   const pokemons = await fetch('https://raw.githubusercontent.com/jherr/pokemon/main/index.json');
+   const pokemons_json = await pokemons.json();
+   return paginate(pokemons_json, { pageSize: 10})
+}
+
+//const { page } = Astro.props;
+
+---
+
+<MainLayout name={data_json.name}>
+<PD {...data_json} />
+</MainLayout>
