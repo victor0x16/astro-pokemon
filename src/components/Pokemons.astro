@@ -1,0 +1,57 @@
+---
+export interface Pokemon {
+  id: number;
+  name: string;
+  image: string;
+};
+
+export interface Props {
+  pokemons: Pokemon[];
+};
+
+const { pokemons } = Astro.props as Props;
+const url = 'https://raw.githubusercontent.com/jherr/pokemon/main/';
+
+
+---
+
+<h1>Pokemon List:</h1>
+<!-- https://raw.githubusercontent.com/jherr/pokemon/main/index.json-->
+<div class="container">
+    {
+      pokemons.map((pok, i) => (
+         <div class="pokemon">
+            <a href=`/pokemon/${pok.id}`>
+              <img src=`${url}${pok.image}` 
+                alt=`My name is ${pok.name}. I'm a pokemon`>
+            </a>
+            <a href=`/pokemon/${pok.id}`>
+              <h2>{pok.name}</h2>
+            </a>
+         </div>
+      ))
+    }
+</div>
+
+
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  img {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  a {
+    color: #141414;
+    text-decoration: none;
+  }
+
+  h2:hover::after {
+    content: ' +';
+    color: skyblue;
+  }
+</style>
