@@ -4,7 +4,7 @@ import Pokemons from '../components/Pokemons.astro';
 
 const pokemons = await fetch('https://raw.githubusercontent.com/jherr/pokemon/main/index.json');
 const pokemons_json = await pokemons.json();
-const pokemons_json_10_first = pokemons_json.filter( (p) => p.id < 11 );
+const pokemons_json_10_first = pokemons_json.filter( (p) => p.id < 16 );
 
 ---
 
